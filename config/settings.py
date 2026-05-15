@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'lms',
     'users',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -124,10 +125,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-REST_FRAMEWORK = {
+REST_FRAMEWORK = ({
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ]
-}
+    ],
+
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+
+    ),
+})
 
 AUTH_USER_MODEL = "users.User"
+
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+

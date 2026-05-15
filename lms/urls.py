@@ -1,14 +1,15 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework import routers
 
 from lms.apps import LmsConfig
-from lms.views import CourseViewSet, LessonListAPIView, LessonCreateAPIView, LessonRetrieveAPIView, LessonUpdateAPIView, \
-    LessonDestroyAPIView
+from lms.views import (CourseViewSet, LessonCreateAPIView,
+                       LessonDestroyAPIView, LessonListAPIView,
+                       LessonRetrieveAPIView, LessonUpdateAPIView)
 
 app_name = LmsConfig.name
 router = routers.DefaultRouter()
 router.register(r'course', CourseViewSet)
-print(router.urls)
+
 
 urlpatterns = [
     path('', include(router.urls)),
