@@ -12,5 +12,4 @@ class PayList(viewsets.ReadOnlyModelViewSet):
     serializer_class = PaySerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filterset_class = PaymentFilter
-    ordering_fields = ['date_pay']
-
+    ordering_fields = ["date_pay"]

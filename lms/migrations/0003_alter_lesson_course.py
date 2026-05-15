@@ -7,13 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('lms', '0002_alter_course_preview_alter_lesson_preview'),
+        ("lms", "0002_alter_course_preview_alter_lesson_preview"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='lesson',
-            name='course',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='lessons', to='lms.course', verbose_name='Связанный курс'),
+            model_name="lesson",
+            name="course",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="lessons",
+                to="lms.course",
+                verbose_name="Связанный курс",
+            ),
         ),
     ]

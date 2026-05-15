@@ -9,8 +9,8 @@ class Command(BaseCommand):
     help = "Добавление фикстур"
 
     def handle(self, *args, **kwargs):
-        user = User.objects.create(email='admin@admin.ru')
-        user.set_password('123')
+        user = User.objects.create(email="admin@admin.ru")
+        user.set_password("123")
         user.is_staff = True
         user.is_superuser = True
         user.save()
