@@ -7,24 +7,59 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('avatar', models.ImageField(blank=True, null=True, upload_to='avatars', verbose_name='Аватар')),
-                ('numbers_phone', models.CharField(blank=True, null=True, verbose_name='Номер телефона')),
-                ('city', models.CharField(blank=True, max_length=300, null=True, verbose_name='Город')),
-                ('email', models.EmailField(max_length=254, unique=True, verbose_name='почта')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "avatar",
+                    models.ImageField(
+                        blank=True,
+                        null=True,
+                        upload_to="avatars",
+                        verbose_name="Аватар",
+                    ),
+                ),
+                (
+                    "numbers_phone",
+                    models.CharField(
+                        blank=True, null=True, verbose_name="Номер телефона"
+                    ),
+                ),
+                (
+                    "city",
+                    models.CharField(
+                        blank=True, max_length=300, null=True, verbose_name="Город"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        max_length=254, unique=True, verbose_name="почта"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Пользователь',
-                'verbose_name_plural': 'Пользователи',
+                "verbose_name": "Пользователь",
+                "verbose_name_plural": "Пользователи",
             },
         ),
     ]
