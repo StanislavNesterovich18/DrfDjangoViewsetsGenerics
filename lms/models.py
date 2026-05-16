@@ -10,8 +10,13 @@ class Course(models.Model):
         upload_to="course/image/", blank=True, null=True, verbose_name="Изображение"
     )
 
-    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                              verbose_name="Владелец")
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Владелец",
+    )
 
     def __str__(self):
         return self.name
@@ -36,8 +41,13 @@ class Lesson(models.Model):
         verbose_name="Связанный курс",
         related_name="lessons",
     )
-    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                              verbose_name="Владелец")
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Владелец",
+    )
 
     def __str__(self):
         return self.name

@@ -1,4 +1,5 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.db import models
 
 from lms.models import Course, Lesson
@@ -101,4 +102,3 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"<{self.user}>"
-
