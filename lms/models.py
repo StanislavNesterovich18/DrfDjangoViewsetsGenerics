@@ -1,5 +1,7 @@
 from django.db import models
 
+from config.settings import AUTH_USER_MODEL
+
 
 class Course(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название")
@@ -7,6 +9,9 @@ class Course(models.Model):
     preview = models.ImageField(
         upload_to="course/image/", blank=True, null=True, verbose_name="Изображение"
     )
+
+    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
+                              verbose_name="Владелец")
 
     def __str__(self):
         return self.name
@@ -27,9 +32,12 @@ class Lesson(models.Model):
         Course,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         verbose_name="Связанный курс",
         related_name="lessons",
     )
+    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
+                              verbose_name="Владелец")
 
     def __str__(self):
         return self.name
