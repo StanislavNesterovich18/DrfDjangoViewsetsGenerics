@@ -10,6 +10,12 @@ class UserCreateSerializer(ModelSerializer):
         fields = ("email", "password")
 
 
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("email", "id", "avatar", "numbers_phone", "city", "is_active", "is_staff")
+
+
 class PaySerializer(serializers.ModelSerializer):
     user_email = serializers.EmailField(source="user.email", read_only=True)
     course_name = serializers.CharField(

@@ -15,7 +15,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path("lesson/", LessonListAPIView.as_view()),
     path("lesson/create/", LessonCreateAPIView.as_view()),
-    path("lesson/retrieve/", LessonRetrieveAPIView.as_view()),
+    path("lesson/retrieve/<int:pk>/", LessonRetrieveAPIView.as_view()),
     path("lesson/update/<int:pk>/", LessonUpdateAPIView.as_view()),
     path("lesson/destroy/<int:pk>/", LessonDestroyAPIView.as_view()),
 ]
