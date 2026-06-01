@@ -13,9 +13,9 @@ router.register(r"course", CourseViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("lesson/", LessonListAPIView.as_view()),
-    path("lesson/create/", LessonCreateAPIView.as_view()),
-    path("lesson/retrieve/", LessonRetrieveAPIView.as_view()),
-    path("lesson/update/<int:pk>/", LessonUpdateAPIView.as_view()),
-    path("lesson/destroy/<int:pk>/", LessonDestroyAPIView.as_view()),
+    path("lesson/", LessonListAPIView.as_view(), name="lesson_list"),
+    path("lesson/create/", LessonCreateAPIView.as_view(), name="lesson_create"),
+    path("lesson/retrieve/<int:pk>/", LessonRetrieveAPIView.as_view(), name="lesson_retrieve"),
+    path("lesson/update/<int:pk>/", LessonUpdateAPIView.as_view(), name="lesson_update"),
+    path("lesson/destroy/<int:pk>/", LessonDestroyAPIView.as_view(), name="lesson_destroy"),
 ]
