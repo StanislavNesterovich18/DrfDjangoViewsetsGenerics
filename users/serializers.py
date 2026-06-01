@@ -13,7 +13,15 @@ class UserCreateSerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ("email", "id", "avatar", "numbers_phone", "city", "is_active", "is_staff")
+        fields = (
+            "email",
+            "id",
+            "avatar",
+            "numbers_phone",
+            "city",
+            "is_active",
+            "is_staff",
+        )
 
 
 class PaySerializer(serializers.ModelSerializer):

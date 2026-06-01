@@ -1,5 +1,8 @@
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 
 from lms.models import Course, Lesson
@@ -95,6 +98,12 @@ class Payment(models.Model):
         choices=TYPE_PAY,
         default=CHECK,
     )
+
+    stripe_price_id = models.TextField(blank=True, null=True)
+    stripe_session_id = models.TextField(blank=True, null=True)
+    stripe_product_id = models.TextField(blank=True, null=True)
+
+
 
     class Meta:
         verbose_name = "Оплата"
