@@ -101,25 +101,22 @@ class LessonDestroyAPIView(generics.DestroyAPIView):
 class SubscriptionAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-
     def post(self, *args, **kwargs):
         user = self.request.user
-        course_id = self.request.POST.get('id')
+        course_id = self.request.POST.get("id")
         try:
             course_item = Course.objects.get(id=course_id)
         except Course.DoesNotExist:
             return Response(
-                {"error": "Курс не найден"},
-                status=status.HTTP_404_NOT_FOUND
+                {"error": "Курс не найден"}, status=status.HTTP_404_NOT_FOUND
             )
 
         subs_item = Subscription.objects.filter(user=user, course=course_item)
 
         if subs_item.exists():
             subs_item.delete()
-            message = 'Подписка удалена'
+            message = "Подписка удалена"
         else:
             Subscription.objects.create(user=user, course=course_item)
-            message = 'Подписка добавлена'
+            message = "Подписка добавлена"
         return Response({"message": message})
-
