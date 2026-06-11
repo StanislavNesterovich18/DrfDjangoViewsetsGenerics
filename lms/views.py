@@ -7,6 +7,7 @@ from lms.models import Course, Lesson, Subscription
 from lms.paginators import Pagination
 from lms.serializers import CourseSerializer, LessonSerializer
 from users.permissions import IsOwner, ModerationPermission
+from users.tasks import send_course_update
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -30,7 +31,16 @@ class CourseViewSet(viewsets.ModelViewSet):
                 IsAuthenticated,
                 IsOwner,
             )
-        elif self.action in ["update", "partial_update", "retrieve"]:
+        elif self.action in ["update", "partial_update"]:
+            permission_cls = (
+                IsAuthenticated,
+                IsOwner | ModerationPermission,
+            )
+            self.permission_classes = permission_cls
+            if all(permission_cls):
+                send_course_update.delay("Курс обновлен","Перейдите на сайт для ознакомление с обновлениями")
+
+        elif self.action == "retrieve":
             self.permission_classes = (
                 IsAuthenticated,
                 IsOwner | ModerationPermission,
