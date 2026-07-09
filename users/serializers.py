@@ -26,12 +26,8 @@ class UserSerializer(ModelSerializer):
 
 class PaySerializer(serializers.ModelSerializer):
     user_email = serializers.EmailField(source="user.email", read_only=True)
-    course_name = serializers.CharField(
-        source="course.name", read_only=True, allow_null=True
-    )
-    lesson_name = serializers.CharField(
-        source="lesson.name", read_only=True, allow_null=True
-    )
+    course_name = serializers.CharField(source="course.name", read_only=True, allow_null=True)
+    lesson_name = serializers.CharField(source="lesson.name", read_only=True, allow_null=True)
 
     class Meta:
         model = Payment
