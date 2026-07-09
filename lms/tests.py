@@ -10,6 +10,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 from django.conf import settings
 from rest_framework.test import APITestCase
+
 from users.models import User
 
 
@@ -27,16 +28,12 @@ class LessonsTestCase(APITestCase):
 
     def test_lesson_create_wrong(self):
         url = reverse("lms:lesson_create")
-        response = self.client.post(
-            url, data={"name": "Test Lesson", "url_video": "Test lesson"}
-        )
+        response = self.client.post(url, data={"name": "Test Lesson", "url_video": "Test lesson"})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_lesson_create(self):
         url = reverse("lms:lesson_create")
-        response = self.client.post(
-            url, data={"name": "Test Lesson", "url_video": "https://youtube.com"}
-        )
+        response = self.client.post(url, data={"name": "Test Lesson", "url_video": "https://youtube.com"})
         data = response.json()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(data["name"], "Test Lesson")
@@ -51,9 +48,7 @@ class LessonsTestCase(APITestCase):
     def test_lesson_update(self):
         self.test_lesson_create()
         url = reverse("lms:lesson_update", kwargs={"pk": self.id_lesson})
-        response = self.client.put(
-            url, data={"name": "Test Lesson2", "url_video": "https://youtube.com"}
-        )
+        response = self.client.put(url, data={"name": "Test Lesson2", "url_video": "https://youtube.com"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()["name"], "Test Lesson2")
 

@@ -1,4 +1,4 @@
-from rest_framework import generics, viewsets, status
+from rest_framework import generics, status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -38,7 +38,7 @@ class CourseViewSet(viewsets.ModelViewSet):
             )
             self.permission_classes = permission_cls
             if all(permission_cls):
-                send_course_update.delay("Курс обновлен","Перейдите на сайт для ознакомление с обновлениями")
+                send_course_update.delay("Курс обновлен", "Перейдите на сайт для ознакомление с обновлениями")
 
         elif self.action == "retrieve":
             self.permission_classes = (
@@ -117,9 +117,7 @@ class SubscriptionAPIView(APIView):
         try:
             course_item = Course.objects.get(id=course_id)
         except Course.DoesNotExist:
-            return Response(
-                {"error": "Курс не найден"}, status=status.HTTP_404_NOT_FOUND
-            )
+            return Response({"error": "Курс не найден"}, status=status.HTTP_404_NOT_FOUND)
 
         subs_item = Subscription.objects.filter(user=user, course=course_item)
 

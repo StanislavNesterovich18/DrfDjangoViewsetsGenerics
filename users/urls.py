@@ -7,9 +7,9 @@ from users.apps import UsersConfig
 from users.views import (
     CreateApiView,
     PayList,
+    UserDestroyAPIView,
     UserRetrieveAPIView,
     UserUpdateAPIView,
-    UserDestroyAPIView,
 )
 
 router = routers.DefaultRouter()

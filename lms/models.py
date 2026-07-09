@@ -1,5 +1,5 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 from config.settings import AUTH_USER_MODEL
 
@@ -7,9 +7,7 @@ from config.settings import AUTH_USER_MODEL
 class Course(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название")
     description = models.TextField(verbose_name="Описание", blank=True, null=True)
-    preview = models.ImageField(
-        upload_to="course/image/", blank=True, null=True, verbose_name="Изображение"
-    )
+    preview = models.ImageField(upload_to="course/image/", blank=True, null=True, verbose_name="Изображение")
 
     owner = models.ForeignKey(
         AUTH_USER_MODEL,
@@ -30,9 +28,7 @@ class Course(models.Model):
 class Lesson(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название")
     description = models.TextField(verbose_name="Описание", blank=True, null=True)
-    preview = models.ImageField(
-        upload_to="lesson/image/", blank=True, null=True, verbose_name="Изображение"
-    )
+    preview = models.ImageField(upload_to="lesson/image/", blank=True, null=True, verbose_name="Изображение")
     url_video = models.TextField()
     course = models.ForeignKey(
         Course,
@@ -61,9 +57,7 @@ class Lesson(models.Model):
 class Subscription(models.Model):
     """Модель подписки пользователя на курс"""
 
-    name = models.CharField(
-        max_length=100, verbose_name="Название подписки", blank=True, null=True
-    )
+    name = models.CharField(max_length=100, verbose_name="Название подписки", blank=True, null=True)
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -79,9 +73,7 @@ class Subscription(models.Model):
         related_name="subscribers",
     )
 
-    subscribed_at = models.DateTimeField(
-        auto_now_add=True, verbose_name="Дата подписки"
-    )
+    subscribed_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата подписки")
 
     is_active = models.BooleanField(default=True, verbose_name="Активна")
 
@@ -93,4 +85,3 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f"{self.user.email} -> {self.course.title}"
-

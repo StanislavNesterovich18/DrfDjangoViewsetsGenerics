@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, viewsets, status
+from rest_framework import generics, status, viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -8,7 +8,7 @@ from lms.models import Course
 from users.filters import PaymentFilter
 from users.models import Payment, User
 from users.serializers import PaySerializer, UserCreateSerializer, UserSerializer
-from users.services import create_stripe_product, create_stripe_price, create_stripe_session
+from users.services import create_stripe_price, create_stripe_product, create_stripe_session
 
 
 class PayList(viewsets.ModelViewSet):
@@ -46,9 +46,7 @@ class PayList(viewsets.ModelViewSet):
         obj_payment.stripe_session_id = stripe_session
         obj_payment.stripe_product_id = stripe_product
         obj_payment.save()
-        return Response({'url': stripe_session['url'], 'price_id': stripe_price['id']},
-                        status=status.HTTP_201_CREATED
-                        )
+        return Response({"url": stripe_session["url"], "price_id": stripe_price["id"]}, status=status.HTTP_201_CREATED)
 
 
 class CreateApiView(generics.CreateAPIView):

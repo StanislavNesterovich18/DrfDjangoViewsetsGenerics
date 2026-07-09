@@ -40,17 +40,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     """Переопределение абстрактной модели пользователя"""
 
     username = None
-    avatar = models.ImageField(
-        null=True, blank=True, upload_to="avatars", verbose_name="Аватар"
-    )
-    numbers_phone = models.CharField(
-        null=True, blank=True, verbose_name="Номер телефона"
-    )
+    avatar = models.ImageField(null=True, blank=True, upload_to="avatars", verbose_name="Аватар")
+    numbers_phone = models.CharField(null=True, blank=True, verbose_name="Номер телефона")
     city = models.CharField(max_length=300, null=True, blank=True, verbose_name="Город")
 
-    email = models.EmailField(
-        unique=True, verbose_name="почта", null=False, blank=False
-    )
+    email = models.EmailField(unique=True, verbose_name="почта", null=False, blank=False)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -82,16 +76,10 @@ class Payment(models.Model):
         CASH: "Наличные",
         CHECK: "Счет",
     }
-    user = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, verbose_name="Пользователь"
-    )
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name="Пользователь")
     date_pay = models.DateTimeField(auto_now=True, verbose_name="Дата оплаты")
-    course = models.ForeignKey(
-        Course, on_delete=models.SET_NULL, null=True, verbose_name="Оплата курса"
-    )
-    lesson = models.ForeignKey(
-        Lesson, on_delete=models.SET_NULL, null=True, verbose_name="Оплата урока"
-    )
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, verbose_name="Оплата курса")
+    lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, null=True, verbose_name="Оплата урока")
     amount_pay = models.PositiveIntegerField(default=0, verbose_name="Сумма оплаты")
     type_pay = models.CharField(
         max_length=5,
@@ -102,8 +90,6 @@ class Payment(models.Model):
     stripe_price_id = models.TextField(blank=True, null=True)
     stripe_session_id = models.TextField(blank=True, null=True)
     stripe_product_id = models.TextField(blank=True, null=True)
-
-
 
     class Meta:
         verbose_name = "Оплата"
